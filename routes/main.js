@@ -73,7 +73,16 @@ function convertFile(expressApplication) {
                     })
                         .then((result) => {
                             newFile = result;
-                            parser.openFile(newFile);
+                            try {
+                                parser.openFile(newFile);
+                            } catch (error) {
+                                console.error(error);
+                                if (error.message == 'Fatal error! Incoming data size is wrong.') {
+                                    errors.push('wrong_data_size');
+                                } else {
+                                    errors.push('opening_crash');
+                                }
+                            }
                             try {
                                 if (!parser.editPhones()) {
                                     errors.push('phones_not_edited');

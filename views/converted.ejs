@@ -20,6 +20,8 @@
     <% for (var i = 0; i < errors.length; i++) { %>
     <% if (errors[i] == 'wrong_file_type') { %>
     <li>неверный тип файла</li>
+    <% } else if (errors[i] == 'wrong_data_size') { %>
+    <li>неверное количество колонок на одной или нескольких вкладках</li>
     <% } else if (errors[i] == 'wrong_file_extension') { %>
     <li>неверное расширение файла</li>
     <% } else if (errors[i] == 'phones_not_edited') { %>
