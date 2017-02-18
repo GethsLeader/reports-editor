@@ -8,7 +8,7 @@ const assert = chai.assert;
 describe('xls', () => {
 
     const Parser = require('../modules/reports-parser').Parser;
-    let parser, file = '/home/tb/tests/incoming_test_careful_usage.ods', outdir = '/home/tb/tests/'; // file = 'test/test.ods', outdir = 'test/';
+    let parser, file = 'test/test.ods', outdir = 'test/';
 
     describe('open', () => {
 

@@ -78,6 +78,17 @@ class Parser {
         }
         this.workbook = xlsx.readFile(file);
         this.file = file;
+
+        let sheetNames = this.workbook.SheetNames;
+        for (let i = 0; i < sheetNames.length; i++) {
+            let worksheet = this.workbook.Sheets[sheetNames[i]],
+                dataSize = xlsx.utils.decode_range(worksheet['!ref']).e;
+            if (dataSize.c < 9) {
+                throw new Error('Fatal error! Incoming data size is wrong.');
+            }
+            // console.log(' *   ', sheetNames[i], ':', 'rows:', dataSize.r, ';', 'colums:', dataSize.c);
+        }
+
         return !!this.workbook;
     }
 
@@ -96,44 +107,35 @@ class Parser {
     }
 
     editDates() {
-        let sheetNames = this.workbook.SheetNames,
-            errors = 0;
+        let sheetNames = this.workbook.SheetNames;
         for (let i = 0; i < sheetNames.length; i++) {
             let worksheet = this.workbook.Sheets[sheetNames[i]],
                 rows = xlsx.utils.decode_range(worksheet['!ref']).e.r + 1,
                 column = 'A';
             for (let j = 1; j <= rows; j++) {
                 let date = worksheet[column + j.toString()];
-                let error = false;
                 date.t = 's';
+                date.w = date.w.replace(/\//g, '.');
                 date.v = date.w;
                 date.h = date.w;
-                if (error) {
-                    errors++;
-                } else {
-                    this.workbook.Sheets[sheetNames[i]][column + j.toString()] = date;
-                }
+                this.workbook.Sheets[sheetNames[i]][column + j.toString()] = date;
             }
             column = 'C';
             for (let j = 1; j <= rows; j++) {
                 let date = worksheet[column + j.toString()];
-                let error = false;
                 date.t = 's';
+                date.w = date.w.replace(/\//g, '.');
                 date.v = date.w;
                 date.h = date.w;
-                if (error) {
-                    errors++;
-                } else {
-                    this.workbook.Sheets[sheetNames[i]][column + j.toString()] = date;
-                }
+                this.workbook.Sheets[sheetNames[i]][column + j.toString()] = date;
             }
         }
-        return errors === 0
+        return true;
     }
 
     editPhones() {
-        var sheetNames = this.workbook.SheetNames;
-        var errors = 0;
+        let sheetNames = this.workbook.SheetNames;
+        let errors = 0;
         for (let i = 0; i < sheetNames.length; i++) {
             let worksheet = this.workbook.Sheets[sheetNames[i]],
                 rows = xlsx.utils.decode_range(worksheet['!ref']).e.r + 1,
@@ -160,12 +162,12 @@ class Parser {
                 }
             }
         }
-        return errors === 0
+        return errors === 0;
     }
 
     editNames() {
-        var sheetNames = this.workbook.SheetNames;
-        var errors = 0;
+        let sheetNames = this.workbook.SheetNames;
+        let errors = 0;
         for (let i = 0; i < sheetNames.length; i++) {
             let worksheet = this.workbook.Sheets[sheetNames[i]],
                 rows = xlsx.utils.decode_range(worksheet['!ref']).e.r + 1,
@@ -185,7 +187,7 @@ class Parser {
                     if (nameParts.length > 1 && nameParts[1]) {
                         name.w = name.w + ' ' + nameParts[1][0].toUpperCase() + '.';
                         if (nameParts.length > 2 && nameParts[2]) {
-                            name.w = name.w + ' ' + nameParts[2][0].toUpperCase() + '.';
+                            name.w = name.w + nameParts[2][0].toUpperCase() + '.';
                         }
                     }
                 } else {
@@ -199,7 +201,7 @@ class Parser {
                 }
             }
         }
-        return errors === 0
+        return errors === 0;
     }
 }
 
