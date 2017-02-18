@@ -1,0 +1,9 @@
+<form class="download-form">
+    <p ng-show="downloader.secondsToStart > 0">Скачивание файла начнется автоматически через
+        <b>{{downloader.secondsToStart}}</b> секунд.</p>
+    <p ng-hide="downloader.secondsToStart > 0">Скачивание файла должно начаться автоматически...</p>
+    <p>Если скачивание не началось автоматически, то воспользуйтесь ссылкой:
+        <a href="{{downloader.link}}" target="_blank" ng-click="downloader.turnOff()">{{downloader.link}}</a>
+    </p>
+    <p class="text-muted">Ссылка на файл будет доступна в течении 24 часов или до перезагрузки сервера.</p>
+</form>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Reports Editor<%= title ? ' - ' + title : '' %></title>
+
+    <section id="pre">
+        <!-- stylesheets -->
+        <%- block('pre-load-stylesheets').toString() %>
+        <!-- scripts -->
+        <%- block('pre-load-scripts').toString() %>
+    </section>
+
+</head>
+
+<body>
+
+<div id="page" class="page">
+
+    <header>
+        <!-- nav-bar -->
+        <nav class="navbar navbar-default" role="navigation" bs-navbar>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Reports Editor</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- body block -->
+        <%- body %>
+    </main>
+</div>
+
+<footer>
+    <div class="copyright">Copyright © 2016, Great TB, all rights reserved.</div>
+</footer>
+
+<section id="post">
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <%- block('post-load-stylesheets').toString() %>
+    <!-- scripts -->
+    <script src="/libs/angular/angular.min.js"></script>
+    <script src="/libs/angular-strap/dist/angular-strap.min.js"></script>
+    <%- block('post-load-scripts').toString() %>
+    <script src="/scripts/main.js"></script>
+    <script src="/components/environment/index.js"></script>
+    <!-- angular -->
+    <script>
+        (function (document, angular) {
+            angular.element(document).ready(function () {
+                angular.bootstrap(document, ['main', 'mgcrea.ngStrap.navbar'].concat(<%- block('angular-modules').toString() %>));
+            });
+        })(document, angular);
+    </script>
+</section>
+
+</body>
+
+</html>

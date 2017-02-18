@@ -1,0 +1,42 @@
+<!-- layout -->
+<%- layout(layoutPath) %>
+
+<!-- content -->
+<% if (errors.length == 0) { %>
+<h3>Файл был успешно сконвертирован</h3>
+<p><b>Внимание!</b> Несмотря на то, что конвертация была проведена успешно, все же следует внимательно проверить
+    получаемый файл на соответствие данных с исходным файлом.</p>
+
+<hr/>
+
+<downloader link="/file/<%= id %>"></downloader>
+
+<%- block('post-load-scripts').append('<script src="/components/downloader/index.js"></script>') %>
+<%- block('angular-modules').append('[\'downloader\']') %>
+<% } else { %>
+<h3>Файл не был сконвертирован</h3>
+<p>Во время конвертации файла произошли следующие ошибки:</p>
+<ul>
+    <% for (var i = 0; i < errors.length; i++) { %>
+    <% if (errors[i] == 'wrong_file_type') { %>
+    <li>неверный тип файла</li>
+    <% } else if (errors[i] == 'wrong_file_extension') { %>
+    <li>неверное расширение файла</li>
+    <% } else if (errors[i] == 'phones_not_edited') { %>
+    <li>ошибки при редактировании телефонных номеров</li>
+    <% } else if (errors[i] == 'names_not_edited') { %>
+    <li>ошибки при редактировании имен</li>
+    <% } else if (errors[i] == 'dates_not_edited') { %>
+    <li>ошибки при редактировании дат</li>
+    <% } else if (errors[i] == 'editing_crash') { %>
+    <li>ошибки при редактировании</li>
+    <% } else if (errors[i] == 'prepare_crash') { %>
+    <li>ошибки при подготовке</li>
+    <% } else if (errors[i] == 'file_not_loaded') { %>
+    <li>ошибка при загрузке файла</li>
+    <% } else { %>
+    <li>неизвестная ошибка (<%= errors[i] %>)</li>
+    <% } %>
+    <% } %>
+</ul>
+<% } %>

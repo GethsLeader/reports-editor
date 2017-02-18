@@ -1,0 +1,8 @@
+!.gitignore
+/.idea
+*~
+/ssl
+/node_modules/
+/public/libs/
+/test/test.xlsx
+/test/result.xlsx

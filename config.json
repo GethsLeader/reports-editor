@@ -1,0 +1,25 @@
+{
+  "host": "localhost",
+  "port": "3000",
+  "securePort": "3001",
+  "securityData": {
+    "key": "ssl/key.pem",
+    "cert": "ssl/cert.pem",
+    "ca": null
+  },
+  "onlySecure": true,
+  "preparationCmd": "libreoffice --headless --convert-to $0 --infilter=CSV:44,34,76,1 $1 --outdir $2",
+  "preparationExt": "xlsx",
+  "allowed2UploadTypes": [
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.oasis.opendocument.spreadsheet",
+    "application/vnd.ms-excel"
+  ],
+  "allowed2UploadExtensions": [
+    ".xlsx",
+    ".ods",
+    ".xls"
+  ],
+  "cleanInterval": 3600000,
+  "timeToClean": 0
+}

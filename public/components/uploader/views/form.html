@@ -1,0 +1,25 @@
+<form action="/convert" method="post" enctype="multipart/form-data" class="upload-form">
+    <fieldset ng-hide="uploader.file">
+        <p class="title">Загрузка файла в <b>табличном"</b> формате</p>
+        <label class="btn btn-default btn-file">
+            Выбрать файл <input type="file" name="tablefile" style="display: none;">
+        </label>
+    </fieldset>
+    <p class="error" ng-show="uploader.file && !uploader.extension">
+        <b>Ошибка!</b> Файл должен быть с одним из этих расширений:
+        <b ng-repeat="ext in uploader.allowedExtensions">
+            {{ext}}
+        </b>!
+    </p>
+    <fieldset class="buttons" ng-show="uploader.file">
+        <div class="file-name">{{uploader.file.name}}</div>
+        <button type="submit" class="btn btn-success" ng-show="uploader.extension"
+                ng-click="uploader.convert()" ng-disabled="uploader.converting">
+            <span ng-hide="uploader.converting">Конвертировать</span>
+            <span ng-show="uploader.converting">Идет конвертация...</span>
+        </button>
+        <button type="reset" class="btn btn-danger" ng-click="uploader.clear()" ng-disabled="uploader.converting">
+            Сбросить
+        </button>
+    </fieldset>
+</form>
