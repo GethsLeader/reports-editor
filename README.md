@@ -44,11 +44,11 @@ bower install
 ```
 npm install mocha -g
 ```
-* install **chai** [\[link\]](http://chaijs.com/) assertion library globally
+* install **Chai** [\[link\]](http://chaijs.com/) assertion library globally
 ```
 npm install chai -g
 ```
-* link **chai** with project (if necessary)
+* link **Chai** with project (if necessary)
 ```
 npm link chai
 ```
